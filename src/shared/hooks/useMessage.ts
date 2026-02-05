@@ -11,7 +11,7 @@ export const useMessage = () => {
     let message = currentMessages[key] ?? key;
 
     for (let param of Object.keys(params)) {
-      message = message.replace(`${param}`, params[param]);
+      message = message.replaceAll(`${param}`, params[param]);
     }
     return message;
   };

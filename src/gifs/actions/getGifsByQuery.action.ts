@@ -10,19 +10,22 @@ type Params = {
 };
 
 export const getGifsByQUery = async (params: Params) => {
-  const response = await giphyApi.get<GiphyResponse>("https://api.giphy.com/v1/gifs/search", {
-    params: {
-      lang: constants.GENERAL.DEFAULT_LANG,
-      limit: constants.API.DEFAULT_GIFS,
-      ...params
-    }
-  });
+  const response = await giphyApi.get<GiphyResponse>(
+    "https://api.giphy.com/v1/gifs/search",
+    {
+      params: {
+        lang: constants.GENERAL.DEFAULT_LANG,
+        limit: constants.API.DEFAULT_GIFS,
+        ...params,
+      },
+    },
+  );
 
   return response.data.data.map((rawGif) => ({
     id: rawGif.id,
     title: rawGif.title,
     url: rawGif.images.original.url,
-    width: Number(rawGif.images.original.height),
-    height: Number(rawGif.images.original.width)
+    width: Number(rawGif.images.original.width),
+    height: Number(rawGif.images.original.height),
   }));
 };
